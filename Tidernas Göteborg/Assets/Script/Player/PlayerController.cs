@@ -1,22 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    float verticalMovement, horizontalMovement;
     Rigidbody rigidBody;
+    InputController inputController;
+    InputAction vertical, horizontal;
+    Vector3 movement, clampedVelocity;
+    float speed = 10;
 
     void Start()
     {
+        inputController = new InputController();
+        inputController.Enable();
+        vertical = inputController.Movement.Vertical;
+        horizontal = inputController.Movement.Horizontal;
         rigidBody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
-        verticalMovement = Input.GetAxisRaw("Vertical");
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
-        Vector3 movement = new Vector3(horizontalMovement, 0, verticalMovement).normalized * 0.2f;
-        transform.position += movement;       
+        movement = new Vector3(horizontal.ReadValue<float>(), 0, vertical.ReadValue<float>()).normalized;
+        rigidBody.velocity += movement;
+        if(movement.magnitude > 0)
+            clampedVelocity = new Vector3(Mathf.Clamp(rigidBody.velocity.x, -10, 10), 0, Mathf.Clamp(rigidBody.velocity.z, -10, 10)).normalized * 10;
+        else
+            clampedVelocity = new Vector3(Mathf.Clamp(rigidBody.velocity.x, -10, 10), 0, Mathf.Clamp(rigidBody.velocity.z, -10, 10));
+        rigidBody.velocity = clampedVelocity;
+        print(rigidBody.velocity.magnitude);
     }
 }
