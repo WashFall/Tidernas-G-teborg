@@ -52,7 +52,7 @@ public class MoneyCounter : MonoBehaviour
             tunneGlennÖre = tunneGlennÖre - 100;
             CalculateKronor(tunneGlennKronor);
         }
-
+        print("funkar");
         WriteOutMoney();
     }
 
@@ -71,7 +71,7 @@ public class MoneyCounter : MonoBehaviour
 
     void WriteOutMoney()
     {
-        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennKronor + " kronor och " + tjuckeGlennÖre + "öre";
-        tunneGlennText.text = "Tunne Glenn: " + tunneGlennKronor + " kronor och " + tunneGlennÖre + "öre";
+        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennKronor + " kronor och " + tjuckeGlennÖre + " öre";
+        tunneGlennText.text = "Tunne Glenn: " + tunneGlennKronor + " kronor och " + tunneGlennÖre + " öre";
     }
 }
