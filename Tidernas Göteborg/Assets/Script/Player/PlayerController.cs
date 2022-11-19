@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
         inputController.Enable();
         vertical = inputController.Movement.Vertical;
         horizontal = inputController.Movement.Horizontal;
-        inputController.Actions.Debug.performed += SlipOnFish;
         rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -60,10 +59,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public async void SlipOnFish(InputAction.CallbackContext ctx)
+    public async void SlipOnFish(float time)
     {
         Vector3 velocity = rigidBody.velocity;
-        await DeactivateControls(0.2f, velocity);
+        await DeactivateControls(time, velocity);
     }
 
     public async Task DeactivateControls(float time, Vector3 velocity)
