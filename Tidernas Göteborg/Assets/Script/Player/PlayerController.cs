@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     float gravity = -10;
     float yValue = 0;
+    bool grounded;
 
     void Start()
     {
@@ -46,7 +47,16 @@ public class PlayerController : MonoBehaviour
             rigidBody.AddForce(0, gravity, 0, ForceMode.Acceleration);
             Vector3 lookDirection = rigidBody.velocity;
             lookDirection.y = 0;
-            transform.rotation = movement == Vector3.zero ? transform.rotation : Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.fixedDeltaTime * 5f);
+            transform.rotation = movement == Vector3.zero ? transform.rotation : Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.fixedDeltaTime * 2.5f);
+        }
+
+        if(grounded == true)
+        {
+            gravity = -100f;
+        }
+        else if(grounded == false)
+        {
+            gravity = -10f;
         }
     }
 
@@ -66,5 +76,17 @@ public class PlayerController : MonoBehaviour
             await Task.Yield();
         }
         canMove = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            grounded = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            grounded = false;
     }
 }
