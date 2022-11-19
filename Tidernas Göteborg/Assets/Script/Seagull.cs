@@ -11,17 +11,23 @@ public class Seagull : MonoBehaviour
 
     [SerializeField] float time;
 
-    Vector3 endPoint;
+    Transform endPoint;
 
     bool atStartPosition;
+    bool inWait = false;
 
     void Start()
     {
-        atStartPosition = true;
+        atStartPosition = false;
 
         Move();
+        endPoint = SelectNewDestination(endingPoints);
     }
 
+    private void Update()
+    {
+        transform.position += (endPoint.position - transform.position) * 0.1f * Time.deltaTime * 10;
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -30,37 +36,40 @@ public class Seagull : MonoBehaviour
         }
     }
 
-    Vector3 SelectNewDestination(Transform[] spots)
+    Transform SelectNewDestination(Transform[] spots)
     {
         int newRandomDestination = Random.Range(0, spots.Length);
 
-        return spots[newRandomDestination].position;
+        return spots[newRandomDestination];
     }
 
     private async void Move()
     {
-        await DelayTime(Random.Range(5, 15));
-
-        if (atStartPosition)
+        if (!inWait)
         {
-            endPoint = SelectNewDestination(endingPoints);
-            atStartPosition = false;
+            await DelayTime(Random.Range(5, 15));
+            if (atStartPosition)
+            {
+                endPoint = SelectNewDestination(endingPoints);
+                atStartPosition = false;
+            }
+            else
+            {
+                endPoint = SelectNewDestination(startingPoints);
+                atStartPosition = true;
+            }
         }
-        else
-        {
-            endPoint = SelectNewDestination(startingPoints);
-            atStartPosition = true;
-        }
-
-        transform.DOMove(endPoint, time / Mathf.Abs(transform.position.z - endPoint.z)).SetEase(Ease.InOutSine).OnComplete(() => Move());
+        Move();
+        //transform.DOMove(endPoint, time / Mathf.Abs(transform.position.z - endPoint.z)).SetEase(Ease.InOutSine).OnComplete(() => Move());
     }
 
     private async Task DelayTime(int timer)
     {
         float endTime = Time.time + timer;
-
-        while(Time.time < endTime)
+        inWait = true;
+        while (Time.time < endTime)
         {
+            inWait = false;
             await Task.Yield();
         }
     }
