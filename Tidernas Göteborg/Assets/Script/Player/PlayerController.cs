@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     Vector3 movement, clampedVelocity;
     float speed = 10;
     private bool canMove = true;
+    float gravity = -10;
+    float yValue = 0;
 
     void Start()
     {
@@ -27,14 +29,20 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
+            yValue = rigidBody.velocity.y;
             movement = new Vector3(horizontal.ReadValue<float>(), 0, vertical.ReadValue<float>()).normalized;
             rigidBody.velocity += movement;
+
             if(rigidBody.velocity.magnitude > 10)
                 clampedVelocity = new Vector3(Mathf.Clamp(rigidBody.velocity.x, -10, 10), 0, Mathf.Clamp(rigidBody.velocity.z, -10, 10)).normalized * speed;
             else
                 clampedVelocity = new Vector3(Mathf.Clamp(rigidBody.velocity.x, -10, 10), 0, Mathf.Clamp(rigidBody.velocity.z, -10, 10));
-            rigidBody.velocity = clampedVelocity;
 
+            if(movement.magnitude == 0)
+                clampedVelocity *= 0.9f;
+
+            clampedVelocity.y = yValue;
+            rigidBody.velocity = clampedVelocity;
             transform.rotation = rigidBody.velocity == Vector3.zero ? transform.rotation : Quaternion.LookRotation(rigidBody.velocity);
         }
     }
