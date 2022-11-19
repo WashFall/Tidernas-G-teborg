@@ -8,8 +8,15 @@ public class FishPickUpContainer : MonoBehaviour
         List<GameObject> fishes = new List<GameObject>();
     public GameObject GetFish()
     {
-        GameObject fish = fishes[fishes.Count - 1];
-        fishes.RemoveAt(fishes.Count - 1);
-        return fish;
+        if(fishes.Count > 0)
+        {
+            GameObject fish = fishes[fishes.Count - 1];
+            fishes.RemoveAt(fishes.Count - 1);
+            return fish;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
