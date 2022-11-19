@@ -18,13 +18,9 @@ public class MoneyCounter : MonoBehaviour
     [HideInInspector] public float tjuckeGlennKronor;
 
     [SerializeField] private float fishValue;
-    private InputController inputController;
 
     void Start()
     {
-        inputController = new InputController();
-        inputController.Enable();
-        inputController.Actions.Debug.performed += DeliverFish;
 
         tunneGlenn÷re = 0;
         tjuckeGlenn÷re = 0;
@@ -38,7 +34,7 @@ public class MoneyCounter : MonoBehaviour
         
     }
 
-    private void DeliverFish(InputAction.CallbackContext ctx)
+    public void DeliverFish()
     {
         tunneGlenn÷re = tunneGlenn÷re + fishValue;
         tjuckeGlenn÷re += fishValue * 10;

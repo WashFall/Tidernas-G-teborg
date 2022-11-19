@@ -5,15 +5,19 @@ using UnityEngine;
 public class Fish : MonoBehaviour
 {
     FishCarryingContainer container;
+    bool fishIsSlippery = false;
+
+    [SerializeField]
+        PlayerController playerController;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void SetContainerReference(FishCarryingContainer containerScript)
     {
@@ -21,8 +25,11 @@ public class Fish : MonoBehaviour
     }
     void IFlewOutOfContainer()
     {
-        transform.parent = null;
-        container.RemoveFish(gameObject);
+        if (container != null)
+        {
+            transform.parent = null;
+            container.RemoveFish(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -30,6 +37,16 @@ public class Fish : MonoBehaviour
         if (other.CompareTag("Container"))
         {
             IFlewOutOfContainer();
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            fishIsSlippery = true;
+        }else if (collision.gameObject.CompareTag("Player") && fishIsSlippery)
+        {
+            playerController.SlipOnFish(0.2f);
         }
     }
 }

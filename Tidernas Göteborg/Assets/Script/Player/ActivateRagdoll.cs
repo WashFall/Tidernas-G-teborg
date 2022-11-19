@@ -31,6 +31,7 @@ public class ActivateRagdoll : MonoBehaviour
         foreach (var rigidBody in rigidbodies)
         {
             rigidBody.isKinematic = false;
+            rigidBody.useGravity = true;
         }
         playerController.enabled = false;
     }
@@ -43,6 +44,7 @@ public class ActivateRagdoll : MonoBehaviour
         foreach (var rigidBody in rigidbodies)
         {
             rigidBody.isKinematic = true;
+            rigidBody.useGravity = false;
         }
         playerController.enabled = true;
     }

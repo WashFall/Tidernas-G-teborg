@@ -17,12 +17,16 @@ public class FishInteractions : MonoBehaviour
     InputAction pickUp;
 
     FishPickUpContainer fishPickUpContainer;
+    FishCarryingContainer fishCarryingContainer;
     void Start()
     {
         inputController = new InputController();
         inputController.Enable();
         pickUp = inputController.Actions.Use;
         pickUp.performed += PickUpFish;
+        pickUp.performed += DropOffFish;
+
+        fishCarryingContainer = myContainer.GetComponent<FishCarryingContainer>();
     }
 
     // Update is called once per frame
@@ -42,18 +46,18 @@ public class FishInteractions : MonoBehaviour
         if (fish != null)
         {
             fish.transform.position = new Vector3(myContainer.transform.position.x, myContainer.transform.position.y+ fishDropOffYOffset, myContainer.transform.position.z);
-            myContainer.GetComponent<FishCarryingContainer>().AddFish(fish);
+            fishCarryingContainer.AddFish(fish);
         }
     }
     GameObject GetFish()
     {
         return fishPickUpContainer.GetFish();
     }
-    void DropOffFish()
+    void DropOffFish(InputAction.CallbackContext callback)
     {
         if (inFishDropOffArea)
         {
-
+            fishCarryingContainer.DeliverFish();
         }
     }
     private void OnTriggerEnter(Collider collision)
