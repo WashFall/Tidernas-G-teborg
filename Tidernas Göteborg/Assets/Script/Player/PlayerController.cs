@@ -52,11 +52,11 @@ public class PlayerController : MonoBehaviour
 
         if(grounded == true)
         {
-            gravity = -100f;
+            gravity = -10f;
         }
         else if(grounded == false)
         {
-            gravity = -10f;
+            gravity = -100f;
         }
     }
 
