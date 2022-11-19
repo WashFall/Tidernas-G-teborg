@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class TjuckeStomachGrow : MonoBehaviour
 {
+    public GameObject tjuckeGlenn;
     public Transform tjuckeHead;
 
+    private Rigidbody rb;
+
+    private float maxSize = 2;
+ 
     void GrowStomach()
     {
         Vector3 growthScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -16,6 +21,12 @@ public class TjuckeStomachGrow : MonoBehaviour
 
         tjuckeHead.localPosition += newHeadPos;
         transform.localPosition += newBodyPos;
+
+        if(transform.localScale.x > maxSize)
+        {
+            rb = tjuckeGlenn.GetComponent<Rigidbody>();
+            rb.AddForce(0, 20, 1);
+        }
     }
 
     private void OnEnable()
