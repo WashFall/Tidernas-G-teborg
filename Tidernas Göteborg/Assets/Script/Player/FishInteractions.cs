@@ -39,20 +39,32 @@ public class FishInteractions : MonoBehaviour
     }
     void AddFishToMyContainer(GameObject fish)
     {
-        fish.transform.position = new Vector3(myContainer.transform.position.x, myContainer.transform.position.y+ fishDropOffYOffset, myContainer.transform.position.z);
-        myContainer.GetComponent<FishCarryingContainer>().AddFish(fish);
+        if (fish != null)
+        {
+            fish.transform.position = new Vector3(myContainer.transform.position.x, myContainer.transform.position.y+ fishDropOffYOffset, myContainer.transform.position.z);
+            myContainer.GetComponent<FishCarryingContainer>().AddFish(fish);
+        }
     }
     GameObject GetFish()
     {
         return fishPickUpContainer.GetFish();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("FishPickUpArea"))
         {
             inFishPickUpArea=true;
             fishPickUpContainer = collision.gameObject.GetComponent<FishPickUpContainer>();
+            Debug.Log("In fish area");
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("FishPickUpArea"))
+        {
+            inFishPickUpArea = false;
         }
     }
 }
