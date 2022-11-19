@@ -29,5 +29,8 @@ public class PlayerController : MonoBehaviour
         else
             clampedVelocity = new Vector3(Mathf.Clamp(rigidBody.velocity.x, -10, 10), 0, Mathf.Clamp(rigidBody.velocity.z, -10, 10));
         rigidBody.velocity = clampedVelocity;
+
+
+        transform.rotation = rigidBody.velocity == Vector3.zero ? transform.rotation : Quaternion.LookRotation(rigidBody.velocity);
     }
 }
