@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     Vector3 movement, clampedVelocity;
     float speed = 10;
     private bool canMove = true;
-    float gravity = -20;
+    float gravity = -10;
     float yValue = 0;
 
     void Start()
@@ -43,8 +43,10 @@ public class PlayerController : MonoBehaviour
 
             clampedVelocity.y = yValue;
             rigidBody.velocity = clampedVelocity;
-            rigidBody.AddForce(0,gravity,0, ForceMode.Acceleration);
-            transform.rotation = rigidBody.velocity == Vector3.zero ? transform.rotation : Quaternion.LookRotation(rigidBody.velocity);
+            rigidBody.AddForce(0, gravity, 0, ForceMode.Acceleration);
+            Vector3 lookDirection = rigidBody.velocity;
+            lookDirection.y = 0;
+            transform.rotation = rigidBody.velocity == Vector3.zero ? transform.rotation : Quaternion.LookRotation(lookDirection);
         }
     }
 
