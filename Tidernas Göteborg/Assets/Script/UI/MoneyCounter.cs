@@ -56,8 +56,8 @@ public class MoneyCounter : MonoBehaviour
         return tjuckeMoney;
     }
 
-    float CalculateKronor(float ören)
-    {
+    //float CalculateKronor(float ören)
+    //{
 
-    }
+    //}
 }
