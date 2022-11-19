@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class MoneyCounter : MonoBehaviour
 {
+    public delegate void TjuckeGrow();
+    public static event TjuckeGrow tjuckeGrow;
+
     public TMP_Text tjuckeGlennText;
     public TMP_Text tunneGlennText;
 
@@ -44,6 +47,8 @@ public class MoneyCounter : MonoBehaviour
         {
             tjuckeGlennÖre = Mathf.Round(tjuckeGlennÖre - 100);
             tjuckeGlennKronor = CalculateKronor(tjuckeGlennKronor);
+            
+            tjuckeGrow?.Invoke();
         }
 
         if (tunneGlennÖre >= 100)
