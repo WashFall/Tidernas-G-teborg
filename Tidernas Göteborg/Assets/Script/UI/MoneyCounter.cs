@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class MoneyCounter : MonoBehaviour
 {
@@ -14,9 +15,14 @@ public class MoneyCounter : MonoBehaviour
     [HideInInspector] public float tjuckeGlennKronor;
 
     private float fishValue;
+    private InputController inputController;
 
     void Start()
     {
+        inputController = new InputController();
+        inputController.Enable();
+        inputController.Actions.Debug.performed += DeliverFish;
+
         fishValue = 14;
         tunneGlenn÷re = 0;
         tjuckeGlenn÷re = 0;
@@ -27,25 +33,27 @@ public class MoneyCounter : MonoBehaviour
     void Update()
     {
         //TODO: Change below condition to trigger when fish is dropped off
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+    }
+
+    private void DeliverFish(InputAction.CallbackContext ctx)
+    {
+        tunneGlenn÷re = tunneGlenn÷re + fishValue;
+        tjuckeGlenn÷re = CalculateTjuckeMoney(tunneGlenn÷re);
+
+        if (tjuckeGlenn÷re > 100)
         {
-            tunneGlenn÷re = tunneGlenn÷re + fishValue;
-            tjuckeGlenn÷re = CalculateTjuckeMoney(tunneGlenn÷re);
-
-            if (tjuckeGlenn÷re > 100)
-            {
-                tjuckeGlenn÷re = tjuckeGlenn÷re - 100;
-                CalculateKronor(tjuckeGlennKronor);
-            }
-
-            if (tunneGlenn÷re > 100)
-            {
-                tunneGlenn÷re = tunneGlenn÷re - 100;
-                CalculateKronor(tunneGlennKronor);
-            }
-
-            WriteOutMoney();
+            tjuckeGlenn÷re = tjuckeGlenn÷re - 100;
+            CalculateKronor(tjuckeGlennKronor);
         }
+
+        if (tunneGlenn÷re > 100)
+        {
+            tunneGlenn÷re = tunneGlenn÷re - 100;
+            CalculateKronor(tunneGlennKronor);
+        }
+
+        WriteOutMoney();
     }
 
     float CalculateTjuckeMoney(float tunneMoney)

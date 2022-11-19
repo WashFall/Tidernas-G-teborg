@@ -114,6 +114,54 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Actions"",
+            ""id"": ""4945f3c1-3267-45ea-be73-0f37b48b145d"",
+            ""actions"": [
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a675cdf-16bc-4e4c-94b0-1403c5a29081"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""8aa8af61-7898-41db-803a-cb785904c4fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9d9a7be5-1422-46eb-9b98-81bdc979471a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e90c0a1-adc1-4143-91ab-beaf2ba678a8"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -122,6 +170,10 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Vertical = m_Movement.FindAction("Vertical", throwIfNotFound: true);
         m_Movement_Horizontal = m_Movement.FindAction("Horizontal", throwIfNotFound: true);
+        // Actions
+        m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
+        m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
+        m_Actions_Use = m_Actions.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,9 +270,55 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // Actions
+    private readonly InputActionMap m_Actions;
+    private IActionsActions m_ActionsActionsCallbackInterface;
+    private readonly InputAction m_Actions_Debug;
+    private readonly InputAction m_Actions_Use;
+    public struct ActionsActions
+    {
+        private @InputController m_Wrapper;
+        public ActionsActions(@InputController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Debug => m_Wrapper.m_Actions_Debug;
+        public InputAction @Use => m_Wrapper.m_Actions_Use;
+        public InputActionMap Get() { return m_Wrapper.m_Actions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IActionsActions instance)
+        {
+            if (m_Wrapper.m_ActionsActionsCallbackInterface != null)
+            {
+                @Debug.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
+                @Debug.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
+                @Debug.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
+                @Use.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
+            }
+            m_Wrapper.m_ActionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Debug.started += instance.OnDebug;
+                @Debug.performed += instance.OnDebug;
+                @Debug.canceled += instance.OnDebug;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
+            }
+        }
+    }
+    public ActionsActions @Actions => new ActionsActions(this);
     public interface IMovementActions
     {
         void OnVertical(InputAction.CallbackContext context);
         void OnHorizontal(InputAction.CallbackContext context);
+    }
+    public interface IActionsActions
+    {
+        void OnDebug(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }
