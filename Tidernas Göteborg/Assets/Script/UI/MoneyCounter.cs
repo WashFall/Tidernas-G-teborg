@@ -23,7 +23,7 @@ public class MoneyCounter : MonoBehaviour
         inputController.Enable();
         inputController.Actions.Debug.performed += DeliverFish;
 
-        fishValue = 14;
+        fishValue = 2;
         tunneGlennÖre = 0;
         tjuckeGlennÖre = 0;
 
@@ -71,7 +71,7 @@ public class MoneyCounter : MonoBehaviour
 
     void WriteOutMoney()
     {
-        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennKronor + "kronor och " + tjuckeGlennÖre + "öre";
-        tunneGlennText.text = "Tunne Glenn: " + tunneGlennKronor + "kronor och " + tunneGlennÖre + "öre";
+        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennKronor + " kronor och " + tjuckeGlennÖre + "öre";
+        tunneGlennText.text = "Tunne Glenn: " + tunneGlennKronor + " kronor och " + tunneGlennÖre + "öre";
     }
 }
