@@ -7,6 +7,7 @@ public class ActivateRagdoll : MonoBehaviour
     List<Collider> colliders;
     List<Rigidbody> rigidbodies;
     PlayerController playerController;
+    Animator animator;
     void Start()
     {
         colliders = new List<Collider>();
@@ -15,6 +16,7 @@ public class ActivateRagdoll : MonoBehaviour
         colliders.AddRange(GetComponentsInChildren<Collider>(true));
         rigidbodies.AddRange(GetComponentsInChildren<Rigidbody>(true));
         playerController = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class ActivateRagdoll : MonoBehaviour
             rigidBody.isKinematic = false;
             rigidBody.useGravity = true;
         }
+        animator.enabled = false;
         playerController.enabled = false;
     }
     public void ResetRagdoll()
@@ -46,6 +49,7 @@ public class ActivateRagdoll : MonoBehaviour
             rigidBody.isKinematic = true;
             rigidBody.useGravity = false;
         }
+        animator.enabled = true;
         playerController.enabled = true;
     }
 }
