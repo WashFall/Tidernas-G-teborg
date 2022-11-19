@@ -49,14 +49,22 @@ public class FishInteractions : MonoBehaviour
     {
         return fishPickUpContainer.GetFish();
     }
+    void DropOffFish()
+    {
+        if (inFishDropOffArea)
+        {
 
+        }
+    }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("FishPickUpArea"))
         {
             inFishPickUpArea=true;
             fishPickUpContainer = collision.gameObject.GetComponent<FishPickUpContainer>();
-            Debug.Log("In fish area");
+        }else if (collision.gameObject.CompareTag("FishDropOffArea"))
+        {
+            inFishDropOffArea=true;
         }
     }
 
@@ -65,6 +73,10 @@ public class FishInteractions : MonoBehaviour
         if (collision.gameObject.CompareTag("FishPickUpArea"))
         {
             inFishPickUpArea = false;
+        }
+        else if (collision.gameObject.CompareTag("FishDropOffArea"))
+        {
+            inFishDropOffArea = false;
         }
     }
 }

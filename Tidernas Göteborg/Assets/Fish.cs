@@ -21,6 +21,7 @@ public class Fish : MonoBehaviour
     }
     void IFlewOutOfContainer()
     {
+        transform.parent = null;
         container.RemoveFish(gameObject);
     }
 
