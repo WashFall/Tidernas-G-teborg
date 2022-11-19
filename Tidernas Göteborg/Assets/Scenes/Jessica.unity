@@ -1330,6 +1330,7 @@ MonoBehaviour:
   "tjuckeGlenn\xD6re": 0
   tunneGlennKronor: 0
   tjuckeGlennKronor: 0
+  fishValue: 2
 --- !u!1 &1974360121
 GameObject:
   m_ObjectHideFlags: 0

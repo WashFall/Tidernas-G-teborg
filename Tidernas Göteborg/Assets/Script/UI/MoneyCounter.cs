@@ -14,7 +14,7 @@ public class MoneyCounter : MonoBehaviour
     [HideInInspector] public float tunneGlennKronor;
     [HideInInspector] public float tjuckeGlennKronor;
 
-    private float fishValue;
+    [SerializeField] private float fishValue;
     private InputController inputController;
 
     void Start()
@@ -23,7 +23,6 @@ public class MoneyCounter : MonoBehaviour
         inputController.Enable();
         inputController.Actions.Debug.performed += DeliverFish;
 
-        fishValue = 2;
         tunneGlenn÷re = 0;
         tjuckeGlenn÷re = 0;
 
@@ -39,27 +38,21 @@ public class MoneyCounter : MonoBehaviour
     private void DeliverFish(InputAction.CallbackContext ctx)
     {
         tunneGlenn÷re = tunneGlenn÷re + fishValue;
-        tjuckeGlenn÷re = CalculateTjuckeMoney(tunneGlenn÷re);
+        tjuckeGlenn÷re += fishValue * 10;
 
-        if (tjuckeGlenn÷re > 100)
+        if (tjuckeGlenn÷re >= 100)
         {
-            tjuckeGlenn÷re = tjuckeGlenn÷re - 100;
-            CalculateKronor(tjuckeGlennKronor);
+            tjuckeGlenn÷re = Mathf.Round(tjuckeGlenn÷re - 100);
+            tjuckeGlennKronor = CalculateKronor(tjuckeGlennKronor);
         }
 
-        if (tunneGlenn÷re > 100)
+        if (tunneGlenn÷re >= 100)
         {
-            tunneGlenn÷re = tunneGlenn÷re - 100;
-            CalculateKronor(tunneGlennKronor);
+            tunneGlenn÷re = Mathf.Round(tunneGlenn÷re - 100);
+            tunneGlennKronor = CalculateKronor(tunneGlennKronor);
         }
-        print("funkar");
+
         WriteOutMoney();
-    }
-
-    float CalculateTjuckeMoney(float tunneMoney)
-    {
-        float tjuckeMoney = (Mathf.Round(tunneMoney * 10));
-        return tjuckeMoney;
     }
 
     float CalculateKronor(float kronor)
