@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FishInteractions : MonoBehaviour
 {
-    [SerializeField]
-    float fishDropOffYOffset = 4;
+
     [SerializeField]
     GameObject myContainer;
 
@@ -45,7 +44,6 @@ public class FishInteractions : MonoBehaviour
     {
         if (fish != null)
         {
-            fish.transform.position = new Vector3(myContainer.transform.position.x, myContainer.transform.position.y+ fishDropOffYOffset, myContainer.transform.position.z);
             fishCarryingContainer.AddFish(fish);
         }
     }

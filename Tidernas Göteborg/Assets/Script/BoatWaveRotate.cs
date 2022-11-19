@@ -39,8 +39,9 @@ public class BoatWaveRotate : MonoBehaviour
         waveTurns++;
         if (waveTurns % waveTurnsToWait == 0)
         {
-            rotation = Random.Range(10, 25);
-            rotateDuration = Random.Range(1, 4);
+            rotation = Random.Range(10, 30);
+            rotateDuration = Random.Range(1.5f, 4);
+            waitTimeBeforeRotateToOtherDirection = Random.Range(1f, 2);
         }
         StartCoroutine(StartRotation());
     }
