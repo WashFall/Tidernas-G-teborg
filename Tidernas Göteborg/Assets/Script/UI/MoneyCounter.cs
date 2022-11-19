@@ -8,16 +8,18 @@ public class MoneyCounter : MonoBehaviour
     public TMP_Text tjuckeGlennText;
     public TMP_Text tunneGlennText;
 
-    [HideInInspector] public float tunneGlennMoney;
-    [HideInInspector] public float tjuckeGlennMoney;
+    [HideInInspector] public float tunneGlennÖre;
+    [HideInInspector] public float tjuckeGlennÖre;
+    [HideInInspector] public float tunneGlennKronor;
+    [HideInInspector] public float tjuckeGlennKronor;
 
     void Start()
     {
-        tunneGlennMoney = 0;
-        tjuckeGlennMoney = 0;
+        tunneGlennÖre = 0;
+        tjuckeGlennÖre = 0;
 
-        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennMoney;
-        tunneGlennText.text = "Tunne Glenn: " + tunneGlennMoney;
+        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennÖre + "öre";
+        tunneGlennText.text = "Tunne Glenn: " + tunneGlennÖre + "öre";
     }
 
     void Update()
@@ -25,11 +27,26 @@ public class MoneyCounter : MonoBehaviour
         //TODO: Change below condition to trigger when fish is dropped off
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            tunneGlennMoney = tunneGlennMoney + 1;
-            tjuckeGlennMoney = CalculateTjuckeMoney(tunneGlennMoney);
+            tunneGlennÖre = tunneGlennÖre + 14;
+            tjuckeGlennÖre = CalculateTjuckeMoney(tunneGlennÖre);
 
-            tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennMoney;
-            tunneGlennText.text = "Tunne Glenn: " + tunneGlennMoney;
+            if (tjuckeGlennÖre > 100)
+            {
+
+            }
+            else
+            {
+                tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennÖre + "öre";
+            }
+
+            if (tunneGlennÖre > 100)
+            {
+
+            }
+            else
+            {
+                tunneGlennText.text = "Tunne Glenn: " + tunneGlennÖre + "öre";
+            }
         }
     }
 
@@ -37,5 +54,10 @@ public class MoneyCounter : MonoBehaviour
     {
         float tjuckeMoney = (Mathf.Round(tunneMoney * 10));
         return tjuckeMoney;
+    }
+
+    float CalculateKronor(float ören)
+    {
+
     }
 }
