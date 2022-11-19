@@ -17,6 +17,9 @@ public class BarrelHitPlayer : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<ActivateRagdoll>().DoRagdoll();
+        }
     }
 }
