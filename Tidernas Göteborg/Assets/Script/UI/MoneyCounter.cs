@@ -13,13 +13,15 @@ public class MoneyCounter : MonoBehaviour
     [HideInInspector] public float tunneGlennKronor;
     [HideInInspector] public float tjuckeGlennKronor;
 
+    private float fishValue;
+
     void Start()
     {
+        fishValue = 14;
         tunneGlennÖre = 0;
         tjuckeGlennÖre = 0;
 
-        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennÖre + "öre";
-        tunneGlennText.text = "Tunne Glenn: " + tunneGlennÖre + "öre";
+        WriteOutMoney();
     }
 
     void Update()
@@ -27,26 +29,22 @@ public class MoneyCounter : MonoBehaviour
         //TODO: Change below condition to trigger when fish is dropped off
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            tunneGlennÖre = tunneGlennÖre + 14;
+            tunneGlennÖre = tunneGlennÖre + fishValue;
             tjuckeGlennÖre = CalculateTjuckeMoney(tunneGlennÖre);
 
             if (tjuckeGlennÖre > 100)
             {
-
-            }
-            else
-            {
-                tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennÖre + "öre";
+                tjuckeGlennÖre = tjuckeGlennÖre - 100;
+                CalculateKronor(tjuckeGlennKronor);
             }
 
             if (tunneGlennÖre > 100)
             {
+                tunneGlennÖre = tunneGlennÖre - 100;
+                CalculateKronor(tunneGlennKronor);
+            }
 
-            }
-            else
-            {
-                tunneGlennText.text = "Tunne Glenn: " + tunneGlennÖre + "öre";
-            }
+            WriteOutMoney();
         }
     }
 
@@ -56,8 +54,16 @@ public class MoneyCounter : MonoBehaviour
         return tjuckeMoney;
     }
 
-    //float CalculateKronor(float ören)
-    //{
+    float CalculateKronor(float kronor)
+    {
+        float nyaKronor = kronor + 1;
 
-    //}
+        return nyaKronor;
+    }
+
+    void WriteOutMoney()
+    {
+        tjuckeGlennText.text = "Tjucke Glenn: " + tjuckeGlennKronor + "kronor och " + tjuckeGlennÖre + "öre";
+        tunneGlennText.text = "Tunne Glenn: " + tunneGlennKronor + "kronor och " + tunneGlennÖre + "öre";
+    }
 }
