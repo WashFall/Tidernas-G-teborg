@@ -8,11 +8,15 @@ public class BoatWaveRotate : MonoBehaviour
     float multiplierRotation = -1;
 
     [SerializeField]
-    float rotateDuration;
+        float rotateDuration;
     [SerializeField]
-    float waitTimeBeforeRotateToOtherDirection;
+        float waitTimeBeforeRotateToOtherDirection;
     [SerializeField]
         float rotation = 25;
+    [SerializeField]
+        int waveTurnsToWait = 10;
+    [SerializeField]
+        int waveTurns = 0;
     void Start()
     {
         StartCoroutine(StartRotation());
@@ -32,6 +36,12 @@ public class BoatWaveRotate : MonoBehaviour
     {
         TweenRotation();
         yield return new WaitForSeconds(rotateDuration+waitTimeBeforeRotateToOtherDirection);
+        waveTurns++;
+        if (waveTurns % waveTurnsToWait == 0)
+        {
+            rotation = Random.Range(10, 25);
+            rotateDuration = Random.Range(1, 4);
+        }
         StartCoroutine(StartRotation());
     }
 }
