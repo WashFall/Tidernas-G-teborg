@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
             rigidBody.AddForce(0, gravity, 0, ForceMode.Acceleration);
             Vector3 lookDirection = rigidBody.velocity;
             lookDirection.y = 0;
-            transform.rotation = rigidBody.velocity == Vector3.zero ? transform.rotation : Quaternion.LookRotation(lookDirection);
+            transform.rotation = movement == Vector3.zero ? transform.rotation : Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.fixedDeltaTime * 5f);
         }
     }
 
