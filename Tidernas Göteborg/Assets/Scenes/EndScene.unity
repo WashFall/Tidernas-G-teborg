@@ -418,7 +418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 273}
+  m_AnchoredPosition: {x: 20, y: 257}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834799612
@@ -443,11 +443,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Congratulations (?)\n\nYou've collected enough money for your horrible
     boss, Tjocke Glenn, to get real fat on your hard earned money and fly away towards
-    the horizon. \n\nIf you'd like to play again, use the button below return to
-    the main menu and restart the game."
+    the horizon. \n\nIf you'd like to play again, use the button below to return
+    to the main menu and restart the game."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7edf9ab5e82d9384fb045cfd89fdb5bb, type: 2}
-  m_sharedMaterial: {fileID: 4954458272072616420, guid: 7edf9ab5e82d9384fb045cfd89fdb5bb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a3625b2c25c926341a49a9fc4fff1607, type: 2}
+  m_sharedMaterial: {fileID: 3454558268322529195, guid: a3625b2c25c926341a49a9fc4fff1607, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1589,7 +1589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &9096316238517762969
 MonoBehaviour:
   m_ObjectHideFlags: 0
