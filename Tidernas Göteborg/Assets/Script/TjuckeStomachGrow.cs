@@ -6,6 +6,7 @@ public class TjuckeStomachGrow : MonoBehaviour
 {
     public GameObject tjuckeGlenn;
     public Transform tjuckeHead;
+    public GameObject[] tjuckeMeshes;
 
     private Rigidbody rb;
 
