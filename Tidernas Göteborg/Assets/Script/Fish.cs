@@ -47,6 +47,7 @@ public class Fish : MonoBehaviour
             fishIsSlippery = true;
         }else if (collision.gameObject.CompareTag("Player") && fishIsSlippery)
         {
+            playerController = FindObjectOfType<PlayerController>();
             playerController.SlipOnFish(0.2f);
         }
     }
