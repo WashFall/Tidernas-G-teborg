@@ -1023,6 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295825963}
+  - component: {fileID: 295825964}
   m_Layer: 0
   m_Name: CreditsScreen
   m_TagString: Untagged
@@ -1053,6 +1054,19 @@ Transform:
   m_Father: {fileID: 4251246}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295825964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295825962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8ded24a6f3ecb4e9f1f93d61d08706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1279438764}
 --- !u!1 &347923494
 GameObject:
   m_ObjectHideFlags: 0
@@ -2668,6 +2682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737174625}
+  - component: {fileID: 1737174626}
   m_Layer: 0
   m_Name: MainMenuItems
   m_TagString: Untagged
@@ -2694,6 +2709,19 @@ Transform:
   m_Father: {fileID: 4251246}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1737174626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737174624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8ded24a6f3ecb4e9f1f93d61d08706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 708068835}
 --- !u!1 &2106774885
 GameObject:
   m_ObjectHideFlags: 0
