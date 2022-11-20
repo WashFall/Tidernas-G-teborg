@@ -11,7 +11,11 @@ public class JokeBubble : MonoBehaviour
 
     private List<GameObject> jokes, punchLines;
     private List<int> usedJokes;
-
+    AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Awake()
     {
         usedJokes = new List<int>();
@@ -68,6 +72,8 @@ public class JokeBubble : MonoBehaviour
 
     private async Task AwaitPunchLine(int index)
     {
+        audioSource.pitch = Random.Range(0.5f, 1.4f);
+        audioSource.Play();
         float endTime = Time.time + 3;
         speechBubble.SetActive(true);
         GameObject text = Instantiate(punchLines[index], speechBubble.transform);

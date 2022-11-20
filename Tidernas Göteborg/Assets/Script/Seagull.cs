@@ -10,16 +10,18 @@ public class Seagull : MonoBehaviour
     public Transform[] endingPoints;
 
     [SerializeField] float time;
-
+    float rotation = -90;
     Transform endPoint;
 
     bool atStartPosition;
     bool inWait = false;
+    AudioSource source;
 
     void Start()
     {
         atStartPosition = false;
 
+        source = GetComponent<AudioSource>();
         Move();
         endPoint = SelectNewDestination(endingPoints);
     }
@@ -38,8 +40,10 @@ public class Seagull : MonoBehaviour
 
     Transform SelectNewDestination(Transform[] spots)
     {
+        rotation *= -1;
         int newRandomDestination = Random.Range(0, spots.Length);
-
+        transform.DORotate(new Vector3(0, rotation, 0),0.2f);
+        source.Play();
         return spots[newRandomDestination];
     }
 

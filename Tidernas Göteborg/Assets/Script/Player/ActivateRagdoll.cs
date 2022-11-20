@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class ActivateRagdoll : MonoBehaviour
 {
@@ -8,17 +10,24 @@ public class ActivateRagdoll : MonoBehaviour
     List<Rigidbody> rigidbodies;
     PlayerController playerController;
     Animator animator;
+    [SerializeField]
+    GameObject ragdollBones;
+    [SerializeField]
+    GameObject spawnPoint;
+    AudioSource source;
+    [SerializeField]
+    FishCarryingContainer container;
     void Start()
     {
         colliders = new List<Collider>();
         rigidbodies = new List<Rigidbody>();
 
-        colliders.AddRange(GetComponentsInChildren<Collider>(true));
-        rigidbodies.AddRange(GetComponentsInChildren<Rigidbody>(true));
+        colliders.AddRange(ragdollBones.GetComponentsInChildren<Collider>(true));
+        rigidbodies.AddRange(ragdollBones.GetComponentsInChildren<Rigidbody>(true));
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,9 +46,13 @@ public class ActivateRagdoll : MonoBehaviour
         }
         animator.enabled = false;
         playerController.enabled = false;
+        source.Play();
+        container.ShootOutAllFish();
+        StartCoroutine(ResetRagdoll());
     }
-    public void ResetRagdoll()
+    IEnumerator ResetRagdoll()
     {
+        yield return new WaitForSeconds(3f);
         foreach (var collider in colliders)
         {
             collider.enabled = false;
@@ -51,5 +64,6 @@ public class ActivateRagdoll : MonoBehaviour
         }
         animator.enabled = true;
         playerController.enabled = true;
+        transform.position = spawnPoint.transform.position;
     }
 }

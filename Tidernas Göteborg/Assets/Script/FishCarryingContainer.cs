@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishCarryingContainer : MonoBehaviour
 {
-    List<GameObject> carryingFish = new List<GameObject>();
+    public List<GameObject> carryingFish = new List<GameObject>();
 
     [SerializeField]
     GameObject dropOffArea;
@@ -12,20 +12,52 @@ public class FishCarryingContainer : MonoBehaviour
     MoneyCounter moneyCounter;
 
     [SerializeField]
+    AudioSource source;
+    [SerializeField]
+    float volume = 2;
+    [SerializeField]
+        AudioClip splatSfx;    
+    [SerializeField]
+        AudioClip dropSFX;
+    [SerializeField]
     float fishDropOffYOffset = 4;
     public void AddFish(GameObject fish)
     {
         if (carryingFish.Count < 5)
         {
             fish.transform.parent = transform;
-            fish.transform.position = new Vector3(transform.position.x, transform.position.y + fishDropOffYOffset, transform.position.z);
+            fish.transform.position = new Vector3(transform.position.x + Random.Range(0,0.3f), transform.position.y + fishDropOffYOffset, transform.position.z + Random.Range(0, 0.3f));
             carryingFish.Add(fish);
             fish.GetComponent<Fish>().SetContainerReference(GetComponent<FishCarryingContainer>());
+            //StartCoroutine(fish.GetComponent<Fish>().SetKinematic(true));
+            fish.GetComponent<Rigidbody>().isKinematic = true;
+            AudioSource newSource = Instantiate(source);
+            newSource.clip = splatSfx;
+            newSource.volume = volume;
+            newSource.Play();
+            Destroy(newSource, 2);
         }
+    }
+    public void ShootOutAllFish()
+    {
+        foreach (var fish in carryingFish)
+        {
+            Rigidbody rb = fish.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.velocity = Vector3.up*10;
+            AudioSource newSource = Instantiate(source);
+            newSource.clip = splatSfx;
+            newSource.volume = volume;
+            newSource.Play();
+            Destroy(newSource, 2);
+        }
+        carryingFish.Clear();
     }
     public void RemoveFish(GameObject fish)
     {
         carryingFish.Remove(fish);
+        fish.GetComponent<Rigidbody>().isKinematic = false;
+        AudioSource.PlayClipAtPoint(splatSfx, Vector3.zero);
     }
     public void DeliverFish()
     {
@@ -35,6 +67,11 @@ public class FishCarryingContainer : MonoBehaviour
             fish.transform.localPosition = new Vector3(dropOffArea.transform.localPosition.x, dropOffArea.transform.localPosition.y + 2, dropOffArea.transform.localPosition.z);
             moneyCounter.DeliverFish();
         }
+        AudioSource newSource = Instantiate(source);
+        newSource.clip = dropSFX;
+        newSource.volume = 1;
+        newSource.Play();
+        Destroy(newSource, 2);
         carryingFish.Clear();
     }
 }
