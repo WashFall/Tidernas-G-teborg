@@ -1,33 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TjuckeStomachGrow : MonoBehaviour
 {
-    public GameObject tjuckeGlenn;
-    public Transform tjuckeHead;
     public GameObject[] tjuckeMeshes;
-
     private Rigidbody rb;
 
-    private float maxSize = 2;
- 
+    private int index = 0;
+
+    private void Start()
+    {
+        tjuckeMeshes[index].gameObject.SetActive(true);
+        rb = GetComponentInParent<Rigidbody>();
+    }
+
     void GrowStomach()
     {
-        Vector3 growthScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Vector3 newHeadPos = new Vector3(0, 0.2f, 0);
-        Vector3 newBodyPos = new Vector3(0, 0.1f, 0);
+        index++;
 
-        transform.localScale += growthScale;
+        index = Mathf.Clamp(index, 0, tjuckeMeshes.Length - 1);
 
-        tjuckeHead.localPosition += newHeadPos;
-        transform.localPosition += newBodyPos;
+        tjuckeMeshes[index].gameObject.SetActive(true);
+        tjuckeMeshes[index - 1].gameObject.SetActive(false);
 
-        if(transform.localScale.x > maxSize)
+        if (tjuckeMeshes[10].activeSelf)
         {
-            rb = tjuckeGlenn.GetComponent<Rigidbody>();
-            rb.AddForce(0, 20, 1);
+            rb.AddForce(10, 20, 10);
+            StartCoroutine(nameof(SwitchScene));
         }
+    }
+
+    IEnumerator SwitchScene()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(2);
     }
 
     private void OnEnable()
