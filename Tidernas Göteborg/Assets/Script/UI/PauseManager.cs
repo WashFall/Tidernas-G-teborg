@@ -15,7 +15,11 @@ public class PauseManager : MonoBehaviour
         inputController.Enable();
         inputController.Actions.Pause.performed += PauseGame;
     }
-
+    private void OnDisable()
+    {
+        inputController.Actions.Pause.performed -= PauseGame;
+        inputController.Disable();
+    }
     private void PauseGame(InputAction.CallbackContext ctx)
     {
         if(Time.timeScale > 0) Time.timeScale = 0;
