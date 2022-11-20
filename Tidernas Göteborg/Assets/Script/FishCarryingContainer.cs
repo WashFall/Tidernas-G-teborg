@@ -42,6 +42,7 @@ public class FishCarryingContainer : MonoBehaviour
     {
         foreach (var fish in carryingFish)
         {
+            fish.transform.parent = null;
             Rigidbody rb = fish.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.velocity = Vector3.up*10;
@@ -57,7 +58,11 @@ public class FishCarryingContainer : MonoBehaviour
     {
         carryingFish.Remove(fish);
         fish.GetComponent<Rigidbody>().isKinematic = false;
-        AudioSource.PlayClipAtPoint(splatSfx, Vector3.zero);
+        AudioSource newSource = Instantiate(source);
+        newSource.clip = splatSfx;
+        newSource.volume = volume;
+        newSource.Play();
+        Destroy(newSource, 2);
     }
     public void DeliverFish()
     {

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c7574f7022f834f9fc0aac718b27ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 8599637857586153102, guid: 4a1e03d531e2f1a41b1816170ea9c217, type: 3}
 --- !u!65 &1055642634
 BoxCollider:
   m_ObjectHideFlags: 0
