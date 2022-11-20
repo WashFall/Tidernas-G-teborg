@@ -3647,6 +3647,7 @@ GameObject:
   - component: {fileID: 3183881458038299244}
   - component: {fileID: 2756936894669821822}
   - component: {fileID: 5135933748658801365}
+  - component: {fileID: 28960523}
   m_Layer: 3
   m_Name: HumanMale_Character_FREE
   m_TagString: Player
@@ -3718,6 +3719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollBones: {fileID: 2980099629691682061}
+  spawnPoint: {fileID: 0}
+  container: {fileID: 5767503612309743532}
 --- !u!114 &8902914390997807217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3775,6 +3778,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 0}
+--- !u!82 &28960523
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917859866978516323}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 701c257667c31c04589f1cb08c6d9ee6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4924148815422547677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,7 +4331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4346,7 +4445,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4460,7 +4559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4541,8 +4640,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5767503612309743575}
   m_LocalRotation: {x: -0, y: -0.67712915, z: -0, w: 0.7358642}
-  m_LocalPosition: {x: 0.07323075, y: 1.068, z: 0.556}
-  m_LocalScale: {x: 0.52297676, y: 0.16383599, z: 0.9234795}
+  m_LocalPosition: {x: 0.04600005, y: 1.092, z: 0.55100006}
+  m_LocalScale: {x: 0.52297676, y: 0.163836, z: 0.92347944}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5767503612163502509}
@@ -4580,7 +4679,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4627,8 +4726,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5895512ceea6440b53911f1220a0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carryingFish: []
   dropOffArea: {fileID: 0}
   moneyCounter: {fileID: 0}
+  source: {fileID: 4696443356311508187, guid: 33dbe6e40a74e664f8fde9745c5c1e71, type: 3}
+  volume: 2
+  splatSfx: {fileID: 8300000, guid: 241d8d11a7eca21498113d1df0892b63, type: 3}
+  dropSFX: {fileID: 8300000, guid: 881c0aad199f60d4baff5fdad0b3e160, type: 3}
   fishDropOffYOffset: 1
 --- !u!65 &5767503612309743533
 BoxCollider:
@@ -4722,7 +4826,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

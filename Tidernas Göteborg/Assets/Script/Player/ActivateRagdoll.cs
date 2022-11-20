@@ -17,6 +17,7 @@ public class ActivateRagdoll : MonoBehaviour
     AudioSource source;
     [SerializeField]
     FishCarryingContainer container;
+    bool isDead = false;
     void Start()
     {
         colliders = new List<Collider>();
@@ -35,6 +36,8 @@ public class ActivateRagdoll : MonoBehaviour
     }
     public void DoRagdoll()
     {
+        if (isDead) { return; }
+        isDead = true;
         foreach (var collider in colliders)
         {
             collider.enabled = true;
@@ -46,6 +49,7 @@ public class ActivateRagdoll : MonoBehaviour
         }
         animator.enabled = false;
         playerController.enabled = false;
+        source.pitch = Random.Range(0.8f,1.6f);
         source.Play();
         container.ShootOutAllFish();
         StartCoroutine(ResetRagdoll());
@@ -53,6 +57,7 @@ public class ActivateRagdoll : MonoBehaviour
     IEnumerator ResetRagdoll()
     {
         yield return new WaitForSeconds(3f);
+        isDead = false;
         foreach (var collider in colliders)
         {
             collider.enabled = false;

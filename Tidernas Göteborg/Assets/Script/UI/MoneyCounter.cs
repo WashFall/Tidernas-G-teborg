@@ -16,12 +16,10 @@ public class MoneyCounter : MonoBehaviour
     [HideInInspector] public float tjuckeGlenn÷re;
     [HideInInspector] public float tunneGlennKronor;
     [HideInInspector] public float tjuckeGlennKronor;
-
     [SerializeField] private float fishValue;
 
     void Start()
     {
-
         tunneGlenn÷re = 0;
         tjuckeGlenn÷re = 0;
 
