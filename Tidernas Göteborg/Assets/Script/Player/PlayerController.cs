@@ -24,13 +24,11 @@ public class PlayerController : MonoBehaviour
         vertical = inputController.Movement.Vertical;
         horizontal = inputController.Movement.Horizontal;
         rigidBody = GetComponent<Rigidbody>();
-        carriedFishes = GetComponent<FishCarryingContainer>();
+        carriedFishes = GetComponentInChildren<FishCarryingContainer>();
     }
 
     void FixedUpdate()
     {
-        speed = 10 / carriedFishes.carryingFish.Count;
-
         if (canMove)
         {
             yValue = rigidBody.velocity.y;
