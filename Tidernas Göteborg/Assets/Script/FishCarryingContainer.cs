@@ -64,7 +64,7 @@ public class FishCarryingContainer : MonoBehaviour
         foreach (GameObject fish in carryingFish)
         {
             fish.transform.parent = dropOffArea.transform;
-            fish.transform.localPosition = new Vector3(dropOffArea.transform.localPosition.x, dropOffArea.transform.localPosition.y + 2, dropOffArea.transform.localPosition.z);
+            fish.transform.localPosition = new Vector3(Random.Range(0,0.2f), 2, Random.Range(0, 0.2f));
             moneyCounter.DeliverFish();
         }
         AudioSource newSource = Instantiate(source);
