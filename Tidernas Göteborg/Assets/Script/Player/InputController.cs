@@ -202,6 +202,15 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""00b2612e-e941-4487-b5c1-7191f343ad45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -248,6 +257,28 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66c1b526-5659-49de-aa83-f248b2e82289"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6131d8fc-8f2d-4ad0-a01f-196f3ea02678"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -262,6 +293,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
         m_Actions_Use = m_Actions.FindAction("Use", throwIfNotFound: true);
+        m_Actions_Pause = m_Actions.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -364,12 +396,14 @@ public partial class @InputController : IInputActionCollection2, IDisposable
     private IActionsActions m_ActionsActionsCallbackInterface;
     private readonly InputAction m_Actions_Debug;
     private readonly InputAction m_Actions_Use;
+    private readonly InputAction m_Actions_Pause;
     public struct ActionsActions
     {
         private @InputController m_Wrapper;
         public ActionsActions(@InputController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Debug => m_Wrapper.m_Actions_Debug;
         public InputAction @Use => m_Wrapper.m_Actions_Use;
+        public InputAction @Pause => m_Wrapper.m_Actions_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -385,6 +419,9 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @Use.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
                 @Use.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
                 @Use.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUse;
+                @Pause.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -395,6 +432,9 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @Use.started += instance.OnUse;
                 @Use.performed += instance.OnUse;
                 @Use.canceled += instance.OnUse;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -408,5 +448,6 @@ public partial class @InputController : IInputActionCollection2, IDisposable
     {
         void OnDebug(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
