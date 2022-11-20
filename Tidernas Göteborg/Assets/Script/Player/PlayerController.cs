@@ -6,15 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rigidBody;
-    InputController inputController;
-    InputAction vertical, horizontal;
-    Vector3 movement, clampedVelocity;
-    float speed = 10;
+    private Rigidbody rigidBody;
+    private InputController inputController;
+    private InputAction vertical, horizontal;
+    private Vector3 movement, clampedVelocity;
+    private float speed = 10;
     private bool canMove = true;
-    float gravity = -10;
-    float yValue = 0;
-    bool grounded;
+    private float gravity = -10;
+    private float yValue = 0;
+    private bool grounded;
+    private FishCarryingContainer carriedFishes;
 
     void Start()
     {
@@ -23,10 +24,13 @@ public class PlayerController : MonoBehaviour
         vertical = inputController.Movement.Vertical;
         horizontal = inputController.Movement.Horizontal;
         rigidBody = GetComponent<Rigidbody>();
+        carriedFishes = GetComponent<FishCarryingContainer>();
     }
 
     void FixedUpdate()
     {
+        speed = 10 / carriedFishes.carryingFish.Count;
+
         if (canMove)
         {
             yValue = rigidBody.velocity.y;
