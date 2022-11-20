@@ -3719,7 +3719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollBones: {fileID: 2980099629691682061}
-  carryPoint: {fileID: 0}
   spawnPoint: {fileID: 0}
   container: {fileID: 5767503612309743532}
 --- !u!114 &8902914390997807217
@@ -4332,7 +4331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4446,7 +4445,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4560,7 +4559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4680,7 +4679,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4827,7 +4826,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7e718675382cde4494a7819cee1e0f9, type: 2}
+  - {fileID: 2100000, guid: be8698924698c7442b409894b2aaa13d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
